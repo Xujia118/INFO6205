@@ -13,9 +13,9 @@ class Solution:
     def countPrimes(self, n: int) -> int:
         list = []
         work = [0]
-        if False:
-            L0204(n, list, work, "up_to_prime")
         if True:
+            L0204(n, list, work, "up_to_prime")
+        if False:
             L0204(n, list, work, "sieve_of_eratosthenes")
         return len(list)
 
@@ -70,25 +70,37 @@ class L0204:
     # You can have any number of private variables and functions
     # YOU CANNOT CALL math.log from Python library
     ###########################################################
+    
+    # If a num can't be divided by any prime number, it's a prime number
     def _up_to_primes(self):
-        if self._n < 2:
-            return 0
+        # if self._n < 2:
+        #     return 0
 
-        root = self._get_root(num)
-        for num in range(2, self._n, 2):
-            for i in range(2, root + 1):
+        # We know 2 is the first prime number
+        self._prime_number_list.append(2)
+
+        for num in range(3, self._n, 2): # don't need to check even numbers
+            if self._isPrime(num):
+                self._append_prime_number(num)
+                print(self._prime_number_list)
+
                 self._increment_work_done()
 
-                if num % i == 0:
-                    break
-            else:
-                self._append_prime_number(num)
-    
+    def _isPrime(self, n):
+        for primer in self._prime_number_list:
+            if primer ** 2 > n:
+                break
+            if n % primer == 0:
+                return False
+        return True
+
+    # Most efficient solution
     def _sieve_of_eratosthenes(self):
         sieve = [True] * self._n
         sieve[0] = False
         sieve[1] = False
 
+        # private method to get square root of n
         root = self._get_root(self._n)
 
         for i in range(2, root + 1):
@@ -98,11 +110,13 @@ class L0204:
                 while factor * i < self._n:
                     sieve[factor * i] = False
                     factor += 1
+
+                    self._increment_work_done() # To be verified...
         
         for i, n in enumerate(sieve):
             if n is True:
                 self._prime_number_list.append(i)
-            
+
     # Binary search to get square root. O(logN)
     def _get_root(self, n):
         left, right = 0, n
@@ -118,6 +132,6 @@ class L0204:
                 right = mid
 
             self._increment_work_done()
-
+            
 solution = Solution()
 print(solution.countPrimes(100))
