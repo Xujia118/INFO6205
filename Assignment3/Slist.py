@@ -75,26 +75,41 @@ class Slist:
             return None
         
         cur = self._first
-        while cur.next != self._last:
-            cur = cur.next
-        
-        popped_val = self._last.val
-        self._last = cur
-        cur.next = None
 
-        return popped_val
+        # Deal with only one node
+        if cur == self._last:
+            self._first = None
+            self._last = None
+            return cur.val
+        
+        prev = None
+        while cur != self._last:
+            prev = cur
+            cur = cur.next  
+
+        self._last = prev
+        prev.next = None
+        return cur.val
+    
+    def peek_top(self):
+        return self._last.val
+    
+    def peek_front(self):
+        return self._first.val
+    
+    def empty(self):
+        return True if self._first is None else False
+
 
 linkedlist = Slist()
 
-linkedlist.append('a')
-linkedlist.append('b')
-linkedlist.append('c')
-linkedlist.append('d')
-linkedlist.append('e')
-linkedlist.append("f")
-linkedlist.pop()
+# linkedlist.append('a')
+# linkedlist.append('b')
+# linkedlist.append('c')
+# linkedlist.append('d')
+# linkedlist.append('e')
+# linkedlist.append("f")
 # popped_left = linkedlist.popleft()
-
+# popped_right = linkedlist.pop()
+# print(popped_right)
 linkedlist.show()
-
-# print(popped_left)
