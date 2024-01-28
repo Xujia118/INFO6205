@@ -57,9 +57,6 @@ class Slist:
             
     # popleft
     def popleft(self):
-        if self._first is None:
-            return None
-
         # get the first, so we have its value and its next
         first_node = self._first
         popped_val = first_node.val
@@ -70,10 +67,7 @@ class Slist:
         return popped_val
  
     # pop
-    def pop(self):
-        if self._first is None:
-            return None
-        
+    def pop(self):        
         cur = self._first
 
         # Deal with only one node
@@ -92,13 +86,13 @@ class Slist:
         return cur.val
     
     def peek_top(self):
-        return self._last.val
+        return self._last.val if self._first else None
     
     def peek_front(self):
-        return self._first.val
+        return self._first.val if self._last else None
     
     def empty(self):
-        return True if self._first is None else False
+        return self._first is None
 
 
 linkedlist = Slist()
@@ -109,7 +103,7 @@ linkedlist = Slist()
 # linkedlist.append('d')
 # linkedlist.append('e')
 # linkedlist.append("f")
-# popped_left = linkedlist.popleft()
+popped_left = linkedlist.popleft()
 # popped_right = linkedlist.pop()
 # print(popped_right)
 linkedlist.show()
