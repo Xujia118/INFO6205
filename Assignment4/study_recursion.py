@@ -63,11 +63,43 @@ class Study:
         return helper(n, s)
 
     # Input a number and print digit in reverse order
+    def printR(self, n, reverse: "bool"):
+        if n == 0:
+            print(0)
+            return
+
+        return self._printR(n)
+    
+    def _printR(self, n):
+        if n == 0:
+            return
+
+        module = n % 10
+        print(module)
+        self._printR(n // 10)
+
+
+    # def printR(self, n, reverse: "bool"):
+    #     if n == 0:
+    #         print(0)
+    #         return
+    #     else:
+    #         self._printR(n)
+
+
+    # def _printR(self, n):
+    #     if n == 0:
+    #         return
+
+    #     module = n % 10
+    #     print(module)
+    #     self._printR(n // 10)
 
 
 n = 1986
 study = Study()
 # print(study.asis_iterative(n))
 # print(study.asis_recursive(n))
-print(study.asis_reverse_iterative(n))
+# print(study.asis_reverse_iterative(n))
 # print(study.asis_reverse_recursive(n))
+study.printR(n, reverse=True)
