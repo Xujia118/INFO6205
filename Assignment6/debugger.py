@@ -126,20 +126,26 @@ class L0322:
     def _get_solution1(self, p: 'int'):
         print("WRITE CODE")
 
-        coins = self._d
+        self._ans = []
         amount = p
 
-        while amount > 0:
-            for coin in coins:
-                if self._v[amount] == 1 + self._v[amount - coin]:
-                    self._k.append(coin)
-                    amount -= coin
-                    break
+        if self._v[amount] != float('inf'):
+            while amount > 0:
+                coin = self._k[amount]
+                self._ans.append(coin)
+                amount -= coin
+        else:
+            self._ans.append(-1)  # No optimal solution found
 
-amount = 6
-coins = [1, 3, 4]
+
+
+
+
+
+amount = 4
+coins = [2]
 solution = Solution()
-print(solution.coinChange(coins, amount))
-# p = L0322(coins, amount, changes=[], work=[0], show=False)
+# print(solution.coinChange(coins, amount))
+p = L0322(coins, amount, changes=[], work=[0], show=False)
 # p._get_solution1(amount)
-# p._alg()
+p._alg()

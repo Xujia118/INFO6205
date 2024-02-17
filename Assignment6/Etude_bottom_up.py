@@ -17,5 +17,7 @@ class Solution:
 
 amount = 6
 coins = [1, 3, 4]
+amount = 4
+coins = [2]
 solution = Solution()
 print(solution.coinChange(coins, amount))
